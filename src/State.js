@@ -21,11 +21,11 @@
  * ...where value represents the updated value of the state - variableName is a reference to this value.
  */
 
-/* Write the appropriate import statement here to import useState */
+import { useState } from 'react';
 
 function State(){
 
-    /* Write the code here to create state to keep track of the selected language */
+    const [language, setLanguage] = useState("English")
 
     const greetingsObjects = [
         {
@@ -55,20 +55,22 @@ function State(){
         }
     ]
 
-    /* Write the code here to find the correct greetingsObject depending on the selected language */
+    const greeting = greetingsObjects.find(greetingsObject => greetingsObject.language === language)
 
-    /* Write the code here to handle the event for changing between options of the drop-down menu and updating state for the selected language */
+    function handleChange(event){
+        setLanguage(event.target.value)
+    }
 
     return (
         <>
-            <select> {/* "select" should have the correct event listener to handle changing between options of the drop-down menu */}
+            <select onChange={handleChange}>
                 <option value="English">English</option>
                 <option value="Spanish">Spanish</option>
                 <option value="Chinese">Chinese</option>
                 <option value="Japanese">Japanese</option>
                 <option value="Korean">Korean</option>
             </select>
-            <h1>{/* Display the text for the selected language */}</h1>
+            <h1>{greeting.text}</h1>
         </>
     );
 }
